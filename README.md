@@ -1,7 +1,7 @@
 
-# Welcome to your CDK Python project!
+# Simple CDK Python script with Hello World output!
 
-This is a blank project for CDK development with Python.
+This is a sample CDK Python project.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -12,7 +12,24 @@ directory.  To create the virtualenv it assumes that there is a `python3`
 package. If for any reason the automatic creation of the virtualenv fails,
 you can create the virtualenv manually.
 
-To manually create a virtualenv on MacOS and Linux:
+Before starting, you need to first configure security credentials for your AWS Cloud Development Kit (CDK) Command Line Interface (CLI).
+
+```
+$ aws configure
+```
+
+This will prompt you for a series of inputs, such as the access key. You would want to configure your credentials via CLI, rather than including it in your script.
+
+To use a specific profile,
+
+```
+$ aws s3 ls --profile <your profile name>
+```
+
+For more details, see https://docs.aws.amazon.com/cdk/v2/guide/configure-access.html.
+
+
+Next, to manually create a virtualenv on MacOS and Linux:
 
 ```
 $ python -m venv .venv
@@ -42,10 +59,6 @@ At this point you can now synthesize the CloudFormation template for this code.
 ```
 $ cdk synth
 ```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
 
 ## Useful commands
 
