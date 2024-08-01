@@ -10,3 +10,13 @@ def handler(event, context):
         #'body': 'Hello, CDK! You have hit {}\n'.format(event['path'])
         'body': 'Hello world!',
     }
+
+
+def main(event, context):
+    # save event to logs
+    print(event)
+
+    return {
+        'statusCode': 200,
+        'body': event
+    }
