@@ -6,6 +6,7 @@ from aws_cdk import (
     # aws_sqs as sqs,
 )
 from constructs import Construct
+from os import path
 
 class HelloCdkStack(Stack):
 
@@ -14,20 +15,12 @@ class HelloCdkStack(Stack):
 
         # Defines AWS Lambda function
         my_function = _lambda.Function(
-          self, "HelloWorldFunction", 
-          runtime = _lambda.Runtime.NODEJS_20_X, # Provide any supported Node.js runtime
-          handler = "index.handler",
-          code = _lambda.Code.from_inline(
-            """
-            exports.handler = async function(event) {
-              return {
-                statusCode: 200,
-                body: JSON.stringify('Hello World!'),
-              };
-            };
-            """
-          ),
+          self, "HelloWorldFunction",
+          runtime = _lambda.Runtime.PYTHON_3_11,
+          handler = "hello.handler", #Name of file: hello, function name: handler
+          code = _lambda.Code.from_asset(path.join(path.dirname(__file__), 'lambda')),
         )
+
 
         # Define the Lambda function URL resource
         my_function_url = my_function.add_function_url(
@@ -36,6 +29,7 @@ class HelloCdkStack(Stack):
 
         # Define a CloudFormation output for your URL
         CfnOutput(self, "myFunctionUrlOutput", value=my_function_url.url)
+
         
         # The code that defines your stack goes here
 
